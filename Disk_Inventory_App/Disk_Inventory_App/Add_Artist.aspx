@@ -103,7 +103,7 @@
                 <asp:Label
                     ID="lblType"
                     runat="server"
-                    Text="Retype Email:"
+                    Text="Artist Type:"  <%--corrected lable 11/12/18--%>
                     AssociatedControlID="ddlType"
                     ForeColor="#666666"
                     Font-Size="Large">
