@@ -1,10 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Add_Cust.aspx.cs" Inherits="Add_Cust" %>
 
+<%-- This pages adds borrowers for the Disk Inventory Applicaiont and was written by Joseph Marsh --%>
+
+<%-- Added SQL Connectivity and exception handeling 11/17/18 JEM --%>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="title" class="text-center">
-        <asp:Label ID="lblTitle" runat="server" Text="Add New Customers" Font-Bold="True" Font-Size="XX-Large"></asp:Label>
+        <asp:Label 
+            ID="lblTitle" 
+            runat="server" 
+            Text="Add New Customers" 
+            Font-Bold="True" 
+            Font-Size="XX-Large"></asp:Label>
     </div>
     <img src="Img/banner.png" class="img-responsive img-rounded" alt="app banner" />
     <br />
@@ -145,6 +153,7 @@
                     ID="txtEmail2"
                     runat="server"
                     TextMode="Email"
+                    Text='<%# Bind("emaill_address") %>'
                     CssClass="form-control"
                     placeholder="Someone@something.com">
                 </asp:TextBox>
@@ -190,6 +199,7 @@
                     runat="server"
                     Text="Phone Number:"
                     AssociatedControlID="txtPhone"
+
                     ForeColor="#666666"
                     Font-Size="Large">
                 </asp:Label>
@@ -200,7 +210,9 @@
                     ID="txtPhone"
                     runat="server"
                     TextMode="Number"
-                    CssClass="form-control"
+                    Text='<%# Bind("first_name") %>'
+                    CssClass="form-control" 
+                    MaxLength="10"
                     placeholder="5559991234" >
                 </asp:TextBox>
             </div>
@@ -234,8 +246,10 @@
             <asp:Button 
                 ID="btnAdd" 
                 runat="server" 
-                Text="Add User" 
-                CssClass="btn-primary" OnClick="btnAdd_Click" />
+                Text="Add User"
+
+                CssClass="btn-primary" 
+                OnClick="btnAdd_Click" />
             <asp:Button 
                 ID="btnReset" 
                 runat="server" 
@@ -253,6 +267,35 @@
         </div>
 
     </div>
-    
+    <%--data sources--%>
+    <asp:SqlDataSource 
+        ID="SqlDataSource1" 
+        runat="server" 
+        ConnectionString="<%$ ConnectionStrings:Disk_InventoryConnectionString %>" 
+        DeleteCommand="DELETE FROM [Borrower] WHERE [borrower_ID] = @borrower_ID" 
+        InsertCommand="INSERT INTO [Borrower] ([emaill_address], [first_name], 
+            [last_name], [phone_number]) 
+            VALUES (@emaill_address, @first_name, @last_name, @phone_number)" 
+        SelectCommand="SELECT * FROM [Borrower]" 
+        UpdateCommand="UPDATE [Borrower] SET [emaill_address] = @emaill_address, 
+            [first_name] = @first_name, [last_name] = @last_name, 
+            [phone_number] = @phone_number WHERE [borrower_ID] = @borrower_ID">
+        <DeleteParameters>
+            <asp:Parameter Name="borrower_ID" Type="Int32" />
+        </DeleteParameters>
+        <InsertParameters>
+            <asp:Parameter Name="emaill_address" Type="String" />
+            <asp:Parameter Name="first_name" Type="String" />
+            <asp:Parameter Name="last_name" Type="String" />
+            <asp:Parameter Name="phone_number" Type="Int64" />
+        </InsertParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="emaill_address" Type="String" />
+            <asp:Parameter Name="first_name" Type="String" />
+            <asp:Parameter Name="last_name" Type="String" />
+            <asp:Parameter Name="phone_number" Type="Int64" />
+            <asp:Parameter Name="borrower_ID" Type="Int32" />
+        </UpdateParameters>
+    </asp:SqlDataSource>
 </asp:Content>
 

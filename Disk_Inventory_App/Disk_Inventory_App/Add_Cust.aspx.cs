@@ -24,9 +24,39 @@ public partial class Add_Cust : System.Web.UI.Page
 
     protected void btnAdd_Click(object sender, EventArgs e)
     {
+        //store data in SQL insert object
+        var parameters = SqlDataSource1.InsertParameters;
+        parameters["emaill_address"].DefaultValue = txtEmail.Text;
+        parameters["first_name"].DefaultValue = txtFirstName.Text;
+        parameters["last_name"].DefaultValue = txtLastName.Text;
+        parameters["phone_number"].DefaultValue = txtPhone.Text;
+        
         if (IsValid)
         {
-            lblSuccess.Text = "Validation Successfull!";
+            try
+            {
+                //Add the data to the datbase
+                SqlDataSource1.Insert();
+
+                //display success to user
+                lblSuccess.CssClass = "text-success";
+                lblSuccess.Text = "User :" + txtEmail.Text + " Successfully added!";
+
+                //clear the fields so more can be added
+                txtEmail.Text = "";
+                txtEmail2.Text = "";
+                txtFirstName.Text = "";
+                txtLastName.Text = "" ;
+                txtPhone.Text = "";
+
+
+            }
+            catch (Exception ex)
+            {
+                //display error to user
+                lblSuccess.CssClass = "text-danger";
+                lblSuccess.Text = "Failed to add user : " + ex.Message;
+            }
         }
     }
 }

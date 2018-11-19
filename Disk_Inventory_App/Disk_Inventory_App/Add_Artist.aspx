@@ -1,5 +1,9 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Add_Artist.aspx.cs" Inherits="Add_Artist" %>
 
+<%-- This pages adds Artists for the Disk Inventory Applicaiont and was written by Joseph Marsh --%>
+
+<%-- Added SQL Connectivity and exception handeling 11/17/18 JEM --%>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
@@ -103,10 +107,11 @@
                 <asp:Label
                     ID="lblType"
                     runat="server"
-                    Text="Artist Type:"  <%--corrected lable 11/12/18--%>
+                    Text="Artist Type:"  
                     AssociatedControlID="ddlType"
                     ForeColor="#666666"
                     Font-Size="Large">
+                    <%--corrected lable 11/12/18--%>
                 </asp:Label>
             </div>
             <div class="col-sm-4 ">
@@ -114,12 +119,9 @@
                 <asp:DropDownList 
                     ID="ddlType" 
                     runat="server"
-                    CssClass="form-control">
-                    <asp:ListItem Value="M">Music Artist</asp:ListItem>
-                    <asp:ListItem Value="VA">Video Actor</asp:ListItem>
-                    <asp:ListItem Value="VP">Video Producer</asp:ListItem>
-                    <asp:ListItem Value="VD">Video Director</asp:ListItem>
+                    CssClass="form-control" DataSourceID="SqlDataSource2" DataTextField="artist_type_description" DataValueField="artist_type_ID">
                 </asp:DropDownList>
+                
             </div>
             <div class="col-sm-4">
                 <%--colomn 3 Validation--%>
@@ -144,7 +146,8 @@
                 ID="btnAdd" 
                 runat="server" 
                 Text="Add Artist" 
-                CssClass="btn-primary" OnClick="btnAdd_Click" />
+                CssClass="btn-primary" 
+                OnClick="btnAdd_Click" />
             <asp:Button 
                 ID="btnReset" 
                 runat="server" 
@@ -162,5 +165,40 @@
         </div>
 
     </div>
+    <%--Database Sources--%>
+    <asp:SqlDataSource 
+        ID="SqlDataSource1" 
+        runat="server" 
+        ConnectionString="<%$ ConnectionStrings:Disk_InventoryConnectionString %>" 
+        DeleteCommand="DELETE FROM [Artist] WHERE [artist_ID] = @artist_ID" 
+        InsertCommand="INSERT INTO [Artist] ([first_name], [last_name], [group_name], 
+            [artist_type_ID]) VALUES (@first_name, @last_name, @group_name, @artist_type_ID)" 
+        SelectCommand="SELECT * FROM [Artist]" 
+        UpdateCommand="UPDATE [Artist] SET [first_name] = @first_name, 
+            [last_name] = @last_name, [group_name] = @group_name, 
+            [artist_type_ID] = @artist_type_ID WHERE [artist_ID] = @artist_ID">
+        <DeleteParameters>
+            <asp:Parameter Name="artist_ID" Type="Int32" />
+        </DeleteParameters>
+        <InsertParameters>
+            <asp:Parameter Name="first_name" Type="String" />
+            <asp:Parameter Name="last_name" Type="String" />
+            <asp:Parameter Name="group_name" Type="String" />
+            <asp:Parameter Name="artist_type_ID" Type="String" />
+        </InsertParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="first_name" Type="String" />
+            <asp:Parameter Name="last_name" Type="String" />
+            <asp:Parameter Name="group_name" Type="String" />
+            <asp:Parameter Name="artist_type_ID" Type="String" />
+            <asp:Parameter Name="artist_ID" Type="Int32" />
+        </UpdateParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource 
+        ID="SqlDataSource2" 
+        runat="server" 
+        ConnectionString="<%$ ConnectionStrings:Disk_InventoryConnectionString %>" 
+        SelectCommand="SELECT * FROM [Artist_Type]">
+    </asp:SqlDataSource>
 </asp:Content>
 

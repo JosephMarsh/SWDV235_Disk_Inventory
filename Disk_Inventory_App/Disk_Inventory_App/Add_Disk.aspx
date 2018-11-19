@@ -65,6 +65,7 @@
                     ID="txtRelDate"
                     runat="server"
                     TextMode="Date"
+                    placeholder="mm/dd/yyyy"
                     CssClass="form-control">
                 </asp:TextBox>
             </div>
@@ -99,22 +100,14 @@
                 <asp:DropDownList 
                     ID="ddlType" 
                     runat="server"
-                    CssClass="form-control">
-                    <asp:ListItem Value="BD">Blu-Ray - Video</asp:ListItem>
-                    <asp:ListItem Value="BD_0">Blu-Ray - Other Media</asp:ListItem>
-                    <asp:ListItem Value="BDA">Blu-Ray - Audio Only</asp:ListItem>
+                    CssClass="form-control" 
+                    DataSourceID="SqlDataSourceDiskType" 
+                    DataTextField="disk_type_description" 
+                    DataValueField="disk_type_ID">
                 </asp:DropDownList>
             </div>
             <div class="col-sm-4">
-                <%--colomn 3 Validation--%>
-                <asp:RequiredFieldValidator
-                    ID="RequiredFieldValidatorType"
-                    runat="server"
-                    ErrorMessage="Required"
-                    ControlToValidate="ddlType"
-                    CssClass="text-danger"
-                    Display="Dynamic">
-                </asp:RequiredFieldValidator>
+                <%--colomn 3 nothing needed--%>
             </div>
         </div>
         <br />
@@ -136,23 +129,14 @@
                 <asp:DropDownList 
                     ID="ddlStatus" 
                     runat="server"
-                    CssClass="form-control">
-                    <asp:ListItem Value="1">Pre-Release</asp:ListItem>
-                    <asp:ListItem Value="2">In Stock</asp:ListItem>
-                    <asp:ListItem Value="3">Checked Out</asp:ListItem>
-                    <asp:ListItem Value="4">Missing</asp:ListItem>
+                    CssClass="form-control" 
+                    DataSourceID="SqlDataSourceStatus"
+                    DataTextField="disk_description" 
+                    DataValueField="status_code_ID">
                 </asp:DropDownList>
             </div>
             <div class="col-sm-4">
-                <%--colomn 3 Validation--%>
-                <asp:RequiredFieldValidator
-                    ID="RequiredFieldValidatorStatus"
-                    runat="server"
-                    ErrorMessage=" Required "
-                    ControlToValidate="ddlStatus"
-                    CssClass="text-danger"
-                    Display="Dynamic">
-                </asp:RequiredFieldValidator>
+                <%--colomn 3 noting needed--%>
             </div>
         </div>
         <br />
@@ -174,22 +158,14 @@
                 <asp:DropDownList 
                     ID="ddlGenre" 
                     runat="server"
-                    CssClass="form-control">
-                    <asp:ListItem Value="1">Rock</asp:ListItem>
-                    <asp:ListItem Value="2">Country</asp:ListItem>
-                    <asp:ListItem Value="3">Rap</asp:ListItem>
+                    CssClass="form-control" 
+                    DataSourceID="SqlDataSourceGenre" 
+                    DataTextField="genre_name" 
+                    DataValueField="genre_ID">
                 </asp:DropDownList>
             </div>
             <div class="col-sm-4">
-                <%--colomn 3 Validation--%>
-                <asp:RequiredFieldValidator
-                    ID="RequiredFieldValidatorGenre"
-                    runat="server"
-                    ErrorMessage=" Required "
-                    ControlToValidate="ddlGenre"
-                    CssClass="text-danger"
-                    Display="Dynamic">
-                </asp:RequiredFieldValidator>
+                <%--colomn 3 nothing needed--%>
             </div>
         </div>
         <br />
@@ -201,7 +177,8 @@
                 ID="btnAdd" 
                 runat="server" 
                 Text="Add Disk" 
-                CssClass="btn-primary" OnClick="btnAdd_Click" />
+                CssClass="btn-primary" 
+                OnClick="btnAdd_Click" />
             <asp:Button 
                 ID="btnReset" 
                 runat="server" 
@@ -219,5 +196,56 @@
         </div>
 
     </div>
+    <%-- Data Sources --%>
+    <asp:SqlDataSource 
+        ID="SqlDataSource1" 
+        runat="server" 
+        ConnectionString="<%$ ConnectionStrings:Disk_InventoryConnectionString %>" 
+        DeleteCommand="DELETE FROM [Disk] WHERE [disk_ID] = @disk_ID" 
+        InsertCommand="INSERT INTO [Disk] ([disk_name], [rel_date], [disk_type_ID], [status_code_ID], 
+            [genre_ID]) VALUES (@disk_name, @rel_date, @disk_type_ID, @status_code_ID, @genre_ID)" 
+        SelectCommand="SELECT * FROM [Disk]" 
+        UpdateCommand="UPDATE [Disk] SET [disk_name] = @disk_name, [rel_date] = @rel_date, 
+            [disk_type_ID] = @disk_type_ID, [status_code_ID] = @status_code_ID, 
+            [genre_ID] = @genre_ID WHERE [disk_ID] = @disk_ID">
+        <DeleteParameters>
+            <asp:Parameter Name="disk_ID" Type="Int32" />
+        </DeleteParameters>
+        <InsertParameters>
+            <asp:Parameter Name="disk_name" Type="String" />
+            <asp:Parameter Name="rel_date" Type="DateTime" />
+            <asp:Parameter Name="disk_type_ID" Type="String" />
+            <asp:Parameter Name="status_code_ID" Type="Int32" />
+            <asp:Parameter Name="genre_ID" Type="Int32" />
+        </InsertParameters>
+        <UpdateParameters>
+            <asp:Parameter Name="disk_name" Type="String" />
+            <asp:Parameter Name="rel_date" Type="DateTime" />
+            <asp:Parameter Name="disk_type_ID" Type="String" />
+            <asp:Parameter Name="status_code_ID" Type="Int32" />
+            <asp:Parameter Name="genre_ID" Type="Int32" />
+            <asp:Parameter Name="disk_ID" Type="Int32" />
+        </UpdateParameters>
+    </asp:SqlDataSource>                    
+    <asp:SqlDataSource 
+        ID="SqlDataSourceDiskType" 
+        runat="server" 
+        ConnectionString="<%$ ConnectionStrings:Disk_InventoryConnectionString %>" 
+        SelectCommand="SELECT [disk_type_description], [disk_type_ID] FROM [Disk_Type]">
+    </asp:SqlDataSource>                    
+    <asp:SqlDataSource 
+        ID="SqlDataSourceStatus" 
+        runat="server" 
+        ConnectionString="<%$ ConnectionStrings:Disk_InventoryConnectionString %>" 
+        SelectCommand="SELECT [disk_description], [status_code_ID] FROM [Disk_Status]">        
+    </asp:SqlDataSource>                    
+    <asp:SqlDataSource 
+        ID="SqlDataSourceGenre" 
+        runat="server" 
+        ConnectionString="<%$ ConnectionStrings:Disk_InventoryConnectionString %>" 
+        SelectCommand="SELECT [genre_name], [genre_ID] FROM [Genre]">
+    </asp:SqlDataSource>
+
+
 </asp:Content>
 

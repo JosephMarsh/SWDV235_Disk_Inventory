@@ -1,7 +1,9 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" ClientIDMode="Static" %>
 
-<!DOCTYPE html>
+<%-- This pages controls navigation and scirpt access for the site written by Joseph Marsh --%>
 
+<%-- Enabled Resources: disk, customer and artist administration  11/17/18 JEM --%>
+<!DOCTYPE html>
 <html>
 <head runat="server">
     <title></title>
@@ -30,17 +32,19 @@
                             </li>
                             <li><a href="UnderConstruction.aspx">Checkout Disk</a>
                             </li>
-                            <li><a href="Add_Cust.aspx">Add New Customer</a>
-                            </li>
-                            <li><a href="Add_Disk.aspx">Add New Disk</a>
-                            </li>
-                            <li><a href="Add_Artist.aspx">Add_Artist</a>
-                            </li>
-                            <li><a href="UnderConstruction.aspx">View all Disks</a>
-                            </li>
-                            <li><a href="UnderConstruction.aspx">View all Customers</a>
-                            </li>
                             <li><a href="UnderConstruction.aspx">Return Disk</a>
+                            </li>
+                            <li><a href="Add_Cust.aspx">Add Customer</a>
+                            </li>
+                            <li><a href="Add_Disk.aspx">Add Disk</a>
+                            </li>
+                            <li><a href="Add_Artist.aspx">Add Artist</a>
+                            </li>
+                            <li><a href="View_Disks.aspx">Disk Administration</a>
+                            </li>
+                            <li><a href="View_Cust.aspx">Customer Administration</a>
+                            </li>
+                            <li><a href="View_Artist.aspx">Artist Administration</a>
                             </li>
                         </ul>
                     </div>

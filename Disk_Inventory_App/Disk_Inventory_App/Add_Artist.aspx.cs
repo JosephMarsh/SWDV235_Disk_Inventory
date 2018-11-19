@@ -17,6 +17,14 @@ public partial class Add_Artist : System.Web.UI.Page
         bool hasArtistName = true;
         string error = "";
 
+        //store data in SQL insert object
+        var parameters = SqlDataSource1.InsertParameters;
+        parameters["first_name"].DefaultValue = txtFirstName.Text;
+        parameters["last_name"].DefaultValue = txtLastName.Text;
+        parameters["group_name"].DefaultValue = txtGroup.Text;
+        parameters["artist_type_ID"].DefaultValue = ddlType.SelectedValue;
+
+        //Validation check
         if(txtFirstName.Text == "" && txtLastName.Text== "" && txtGroup.Text == "")
         {
             hasArtistName = false;
@@ -24,17 +32,29 @@ public partial class Add_Artist : System.Web.UI.Page
             lblSuccess.CssClass = "text-danger";
             lblSuccess.Text = error; 
         }
-        else
-        {
-            hasArtistName = true;
-            error = "";
-            lblSuccess.CssClass = "text-success";
-        }
 
+        //Add Artist to the database
         if(IsValid && hasArtistName)
         {
-            lblSuccess.CssClass = "text-success";
-            lblSuccess.Text = "Validation Successfull!";
+            try
+            {
+                SqlDataSource1.Insert();
+                txtFirstName.Text = "";
+                txtGroup.Text = "";
+                txtLastName.Text = "";
+                ddlType.SelectedIndex = 0;
+
+                //Display success
+                lblSuccess.CssClass = "text-success";
+                lblSuccess.Text = "Artist Added!";
+            }
+            catch (Exception ex)
+            {
+                //Display error message
+                lblSuccess.CssClass = "text-danger";
+                lblSuccess.Text = "Failed to add user : " + ex.Message;                
+            }
+
         }
     }
 
