@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="View_Cust.aspx.cs" Inherits="View_Cust" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="View_Cust.aspx.cs" Inherits="DiskInventory.View_Cust" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -240,6 +240,7 @@
                                     OnClientClick="return confirm('Are you sure you want to delete this user?')"
                                     CommandName="Delete"
                                     CssClass="btn-danger"
+                                    OnClick="LinkButton2_Click"
                                     Text="Delete"></asp:Button>
                             </ItemTemplate>
                         </asp:TemplateField>

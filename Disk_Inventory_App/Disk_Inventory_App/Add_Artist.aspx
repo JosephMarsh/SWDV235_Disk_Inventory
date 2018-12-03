@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Add_Artist.aspx.cs" Inherits="Add_Artist" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Add_Artist.aspx.cs" Inherits="DiskInventory.Add_Artist" %>
 
 <%-- This pages adds Artists for the Disk Inventory Applicaiont and was written by Joseph Marsh --%>
 

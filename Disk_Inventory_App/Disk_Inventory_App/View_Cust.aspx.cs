@@ -5,10 +5,19 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class View_Cust : System.Web.UI.Page
+namespace DiskInventory
 {
-    protected void Page_Load(object sender, EventArgs e)
-    {
 
+    public partial class View_Cust : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void LinkButton2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

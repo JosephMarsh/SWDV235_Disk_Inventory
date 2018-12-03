@@ -5,16 +5,18 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-
+namespace DiskInventory
+{
     public partial class MasterPage : System.Web.UI.MasterPage
     {
 
-        public string Potato
-    {
-        set { Potato = value; }
-    }
+        public string ErrorText
+        {
+            set { ErrorText = value; }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
 
         }
     }
+}

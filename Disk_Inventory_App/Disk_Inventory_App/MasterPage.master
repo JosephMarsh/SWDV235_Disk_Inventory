@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" ClientIDMode="Static" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="DiskInventory.MasterPage" ClientIDMode="Static" %>
 
 <%-- This pages controls navigation and scirpt access for the site written by Joseph Marsh --%>
 
@@ -30,9 +30,9 @@
                         <ul class="nav navbar-nav">
                             <li><a href="Default.aspx">Home</a>
                             </li>
-                            <li><a href="UnderConstruction.aspx">Checkout Disk</a>
+                            <li><a href="Checkout.aspx">Checkout Disk</a>
                             </li>
-                            <li><a href="UnderConstruction.aspx">Return Disk</a>
+                            <li><a href="Checkin.aspx">Return Disk</a>
                             </li>
                             <li><a href="Add_Cust.aspx">Add Customer</a>
                             </li>

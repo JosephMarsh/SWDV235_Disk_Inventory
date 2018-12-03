@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Add_Cust.aspx.cs" Inherits="Add_Cust" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="Add_Cust.aspx.cs" Inherits="DiskInventory.Add_Cust" %>
 
 <%-- This pages adds borrowers for the Disk Inventory Applicaiont and was written by Joseph Marsh --%>
 
