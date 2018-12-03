@@ -21,7 +21,7 @@
         <legend class="label-info">Disk Return Menu</legend>
         <%--row 1--%>
         <div class="row">
-            <div class="col-sm-3 text-center ">
+            <div class="col-sm-2 text-center ">
                 <%--colomn 1 labels--%>
                 <asp:Label
                     ID="lblName"
@@ -32,7 +32,7 @@
                     Font-Size="Large">
                 </asp:Label>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <%--colomn 1 Main--%>
                 <asp:ListBox 
                     ID="lbxMovies" 
@@ -48,10 +48,59 @@
                 </asp:ListBox>
                 
             </div>
-            <div class="col-sm-1">
+            <div class="col-sm-1 text-center ">
                 <%--colomn 2 lables--%>
+                <asp:Label
+                    ID="lblDetials"
+                    runat="server"
+                    Text="Detials:"
+                    AssociatedControlID="DetailsViewDisks"
+                    ForeColor="#666666"
+                    Font-Size="Large">
+                </asp:Label>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-5">
+                <asp:DetailsView
+                    ID="DetailsViewDisks"
+                    runat="server"
+                    DataSourceID="SqlDataSourceDiskDetials" 
+                    AutoGenerateRows="False" 
+                    CssClass="table table-bordered table-condensed"
+                    DataKeyNames="disk_ID">
+                    <Fields>
+                        <asp:TemplateField 
+                            HeaderText="Disk ID" 
+                            InsertVisible="False"
+                            HeaderStyle-Font-Size="Large"
+                            HeaderStyle-ForeColor="#666666"
+                            SortExpression="disk_ID">
+                            <ItemTemplate>
+                                <asp:Label 
+                                    runat="server" 
+                                    Font-Size="Large"
+                                    Text='<%# Bind("disk_ID") %>' 
+                                    ID="Label1">
+                                </asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+                        <asp:TemplateField 
+                            HeaderText="Disk Name" 
+                            HeaderStyle-Font-Size="Large"
+                            HeaderStyle-ForeColor="#666666"
+                            SortExpression="disk_name">
+                            <ItemTemplate>
+                                <asp:Label 
+                                    runat="server" 
+                                    Font-Size="Large"
+                                    Text='<%# Bind("disk_name") %>' 
+                                    ID="Label2">
+                                </asp:Label>
+                            </ItemTemplate>
+                        </asp:TemplateField>
+
+                    </Fields>
+                </asp:DetailsView>
+                
             </div>
        </div>
         <%--row 2--%>
@@ -181,6 +230,20 @@
             <asp:Parameter Name="borrower_ID" Type="Int32"></asp:Parameter>
             <asp:Parameter Name="disk_ID" Type="Int32"></asp:Parameter>
         </UpdateParameters>
+    </asp:SqlDataSource>
+    <asp:SqlDataSource
+        runat="server"
+        ID="SqlDataSourceDiskDetials"
+        ConnectionString='<%$ ConnectionStrings:Disk_InventoryConnectionString %>'
+        SelectCommand="SELECT [disk_ID], [disk_name] FROM [Disk] WHERE ([disk_ID] = @disk_ID)">
+        <SelectParameters>
+            <asp:ControlParameter 
+                ControlID="lbxMovies" 
+                PropertyName="SelectedValue" 
+                Name="disk_ID" 
+                Type="Int32">
+            </asp:ControlParameter>
+        </SelectParameters>
     </asp:SqlDataSource>
 </asp:Content>
 

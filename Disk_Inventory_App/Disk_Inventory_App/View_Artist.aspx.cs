@@ -52,12 +52,13 @@ namespace DiskInventory
             }
             catch (NullReferenceException ex)
             {
-
+                //Nulls are expected
             }
         }
         protected void DetialsView1_modeChangeing(object sender, System.Web.UI.WebControls.DetailsViewModeEventArgs e)
         {
             //Was goung to use this but abandond it.
+            //may use it for somethng later
         }
 
 

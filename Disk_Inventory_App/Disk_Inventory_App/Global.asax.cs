@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 
 /// <summary>
-/// Summary description for Global
+/// Gobal 
 /// </summary>
 
 namespace DiskInventory

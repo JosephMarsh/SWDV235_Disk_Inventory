@@ -67,7 +67,6 @@
                     CssClass="form-control"
                     Font-Size="Large"
                     SelectionMode="Single" 
-                    AutoPostBack="true"
                     DataSourceID="SqlDataSourceDisk" 
                     DataTextField="disk_name"
                     ToolTip="Select the disk you wish to checkout."

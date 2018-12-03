@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="DiskInventory.MasterPage" ClientIDMode="Static" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs"  CodeBehind="~/MasterPage.master.cs" Inherits="DiskInventory.MasterPage" ClientIDMode="Static" %>
 
 <%-- This pages controls navigation and scirpt access for the site written by Joseph Marsh --%>
 
@@ -23,13 +23,11 @@
                 <div class="container-fluid">
 
                     <div class="navbar-header">
-                        <a class="navbar-brand" style="font-size: 2em;">Menu</a>
+                        <a href="Default.aspx" class="navbar-brand" style="font-size: 2em;">Home</a>
                     </div>
 
                     <div style="display: inline-block;">
                         <ul class="nav navbar-nav">
-                            <li><a href="Default.aspx">Home</a>
-                            </li>
                             <li><a href="Checkout.aspx">Checkout Disk</a>
                             </li>
                             <li><a href="Checkin.aspx">Return Disk</a>
