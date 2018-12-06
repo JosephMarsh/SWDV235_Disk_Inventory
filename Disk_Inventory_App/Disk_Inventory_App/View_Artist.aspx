@@ -162,15 +162,15 @@
                         <asp:TemplateField ShowHeader="False">
                             <EditItemTemplate>
                                 <asp:Button
-                                    ID="LinkButton1"
+                                    ID="btnUpdate"
                                     runat="server"
                                     CssClass="btn-primary"
                                     CausesValidation="True"
                                     OnClick="btnUpdate_Click"
-                                     CommandName="Update"
+                                    CommandName="Update"
                                     Text="Update"></asp:Button>
                                 <asp:Button
-                                    ID="LinkButton2"
+                                    ID="btnCancel"
                                     runat="server"
                                     CssClass="btn-warning"
                                     CausesValidation="False"
@@ -179,26 +179,25 @@
                             </EditItemTemplate>
                             <ItemTemplate>
                                 <asp:Button
-                                    ID="LinkButton1"
+                                    ID="btnEdit"
                                     runat="server"
                                     CssClass="btn-primary"
                                     CausesValidation="False"
                                     CommandName="Edit"
                                     Text="Edit"></asp:Button>
                                 <asp:Button
-                                    ID="LinkButton2"
+                                    ID="btnDelete"
                                     runat="server"
                                     CssClass="btn-danger"
                                     OnClientClick="return confirm('Are you sure you want to delete this Artist?')"
+                                    OnClick="btnDelete_Click"
                                     CausesValidation="False"
                                     CommandName="Delete"
                                     Text="Delete"></asp:Button>
                             </ItemTemplate>
                         </asp:TemplateField>
                     </Fields>
-
                 </asp:DetailsView>
-
                 <br />
             </div>
         </div>
@@ -246,6 +245,9 @@
 
             </div>
         </div>
+
+
+    <div class="modal"></div>
     <%-- Data Sources --%>
     <asp:SqlDataSource 
         ID="SqlDataSourceViewArtist" 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.SqlClient;
 
 /// <summary>
 /// Gobal 
@@ -12,6 +13,7 @@ namespace DiskInventory
 
     public partial class Global : System.Web.HttpApplication
     {
+
 
         void Application_Start(object sender, EventArgs e)
         {
@@ -28,9 +30,38 @@ namespace DiskInventory
         void Application_Error(object sender, EventArgs e)
         {
             // Code that runs when an unhandled error occurs
-            Exception ex = Server.GetLastError().InnerException;
-            Session["Exception"] = ex;
-            Response.Redirect("Error.aspx", false);
+            //grab last error
+
+            //store it in session
+
+            try
+            {
+                if (ErrorHandeler.GlobalSqlException != null)
+                {
+                    ErrorHandeler.GlobalSqlException = (SqlException)Server.GetLastError();
+                }
+            }
+            catch (Exception)
+            {
+                //if this doesn't work move on.
+            }
+            
+            try
+            {
+                //grab last error
+                Exception ex = Server.GetLastError();
+                //store the exception in Global variables
+                ErrorHandeler.GlobalException = ex;
+                ErrorHandeler.ErrorMessage = ex.InnerException.ToString();
+            }
+            catch (NullReferenceException ex3)
+            {
+                ErrorHandeler.ErrorMessage = "Unknown error";
+            }
+            catch(Exception ex2)//catchall
+            {
+                Response.Redirect("Error.aspx", false);
+            }
             
         }
 

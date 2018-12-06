@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data.SqlClient;
 
 /// <summary>
 /// Summary description for ErrorHandeler
@@ -9,15 +10,12 @@ using System.Web;
 
 namespace DiskInventory
 {
-    public class ErrorHandeler
+    public static class ErrorHandeler
     {
-        public string ErrorMessage { get; set; }
-
-        public ErrorHandeler()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
+        public static string ErrorMessage { get; set; }
+        public static Exception GlobalException { get; set; }
+        public static SqlException GlobalSqlException { get; set; }
     }
+
+   
 }

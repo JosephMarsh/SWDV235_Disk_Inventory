@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="E500.aspx.cs" Inherits="E500" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="E500.aspx.cs" Inherits="DiskInventory.E500" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -39,6 +39,15 @@
                     Text="Return to Home Page"
                     PostBackUrl="~/Default.aspx"
                     CssClass="btn btn-danger" />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4">
+                <asp:Label ID="lblErrorNo" runat="server" Text=""></asp:Label>
+            </div>
+            <div class="col-lg-8">
+                <h2 class="text-center">Details:</h2>
+                <asp:Label ID="lblErrorDetials" runat="server" Text=""></asp:Label>
             </div>
         </div>
     </fieldset>
